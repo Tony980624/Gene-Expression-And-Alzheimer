@@ -86,3 +86,17 @@ $$
 Boosting 是一种提升模型性能的集成学习方法，通过将一系列弱学习器（通常是准确率略高于随机猜测的模型）组合成一个强学习器来提高预测效果。Boosting 的核心思想是在每一轮训练中关注错误分类的数据样本
 
 之所以在这个数据采用Boosting模型，是因为Boosting模型是基于决策树的，它比较适用于高维数据，不太需要降维。
+
+决策树训练依据:熵Entropy
+
+$$
+H(s) = -\sum^c_{i=1}p_ilog_2 (p_i)
+$$
+
+其中 $p_i$ 代表类别i的比例
+
+基因重要度排列，前十名：
+![ad](https://github.com/Tony980624/Gene-Expression-And-Alzheimer/blob/main/file01/output.png)
+
+最终模型交叉验证错误率约为10%,训练集错误率为0，存在过拟合问题。
+

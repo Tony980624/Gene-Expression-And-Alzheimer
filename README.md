@@ -127,3 +127,9 @@ filtered_precm = precm
 filtered_precm[abs(filtered_precm) < 0.1] = 0
 qgraph(round(filtered_precm,2),graph = 'cor',edge.labels = T,filetype = "png", filename = "partial_correlation_graph2.png")
 ```
+
+![ad](https://github.com/Tony980624/Gene-Expression-And-Alzheimer/blob/main/file01/output2.png)
+
+![ad](https://github.com/Tony980624/Gene-Expression-And-Alzheimer/blob/main/file01/output3.png)
+
+对比发现老年痴呆患者有两组基因之间失去了关联。

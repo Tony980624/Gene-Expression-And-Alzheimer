@@ -79,6 +79,9 @@ $$
 -\sum_{i=1}^n (y_ilog(p_i)+(1-y_i)log(1-p_i))+\lambda\sum^p_{j=1}|\beta_j|
 $$
 
+![pca2](https://github.com/Tony980624/Gene-Expression-And-Alzheimer/blob/main/file01/000012.png)
+
+
 最终模型的交叉验证错误率为10%左右，训练集错误率为4%，不算严重过拟合。
 
 ## Boosting 模型
@@ -100,3 +103,27 @@ $$
 
 最终模型交叉验证错误率约为10%,训练集错误率为0，存在过拟合问题。
 
+## Graphical Lasso
+
+$$
+cor_{x_ix_j|x_{-ij}}=-\frac{\omega_{ij}}{\sqrt{\omega_{ii}\omega_{jj}}}
+$$
+
+$\Omega = \Sigma^{-1}$, $\Sigma$ 是协方差矩阵, $\Omega$ 被称为精确度矩阵。
+
+$\omega_{ii}$ 以及 $\omega_{jj}$ 代表 精度矩阵的对角元素，代表其条件方差的倒数。
+
+$\omega_{ij}$ 代表精度矩阵的第i行第j列。
+
+
+```{r}
+library(huge)
+library(qgraph)
+glasso.out = huge(no_group,method = 'glasso',lambda = seq(0.001,0.5,length.out=100))
+glasso.sel = huge.select(glasso.out,criterion = 'ebic')
+bestind = glasso.sel$opt.index
+precm = glasso.sel$icov[[bestind]]
+filtered_precm = precm
+filtered_precm[abs(filtered_precm) < 0.1] = 0
+qgraph(round(filtered_precm,2),graph = 'cor',edge.labels = T,filetype = "png", filename = "partial_correlation_graph2.png")
+```
